@@ -9,6 +9,7 @@
 	<ItemGroup>
 	  <Compile Remove="Extensions\ConvertExtensions.cs" />
 	  <Compile Remove="Extensions\EnumerableExtensions.cs" />
+	  <Compile Remove="Helper\LoggerHelper.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -18,6 +19,16 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Meowv.Blog.Domain\Meowv.Blog.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Helper\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Extensions\Log4NetExtensions.cs">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

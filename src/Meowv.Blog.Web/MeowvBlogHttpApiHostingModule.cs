@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Meowv.Blog.Configurations;
 using Meowv.Blog.EntityFrameworkCore;
+using Meowv.Blog.HttpApi.Hosting.Filters;
 using Meowv.Blog.HttpApi.Hosting.Middleware;
 using Meowv.Blog.Swagger;
 using Meowv.Blog.ToolKits.Base;
@@ -11,11 +12,13 @@ using Meowv.Blog.ToolKits.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 
@@ -73,6 +76,19 @@ namespace Meowv.Blog.HttpApi.Hosting
                 //        await context.Response.WriteAsync(result.ToJson());
                 //    }
                 //};
+
+
+            });
+
+            Configure<MvcOptions>(options => 
+            {
+                var filterMetadata = options.Filters.FirstOrDefault(x => x is ServiceFilterAttribute attribute && attribute.ServiceType.Equals(typeof(AbpExceptionFilter)));
+
+                //移除AbpExceptionFilter
+                options.Filters.Remove(filterMetadata);
+
+                //添加自己实现的 MeowvBlogExceptionFilter
+                options.Filters.Add(typeof(MeowvBlogExceptionFilter));
             });
 
             // 认证授权

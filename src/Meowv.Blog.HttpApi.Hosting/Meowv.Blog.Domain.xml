@@ -34,6 +34,11 @@
             ApiVersion
             </summary>
         </member>
+        <member name="T:Meowv.Blog.Configurations.AppSettings.Caching">
+            <summary>
+            Caching
+            </summary>
+        </member>
         <member name="F:Meowv.Blog.Configurations.GitHubConfig.API_Authorize">
             <summary>
             GET请求，跳转GitHub登录界面，获取用户授权，得到code

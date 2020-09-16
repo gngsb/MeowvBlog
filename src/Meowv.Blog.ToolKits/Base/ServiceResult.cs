@@ -43,10 +43,10 @@ namespace Meowv.Blog.ToolKits.Base
         /// <summary>
         /// 响应失败
         /// </summary>
-        /// <param name="meaage"></param>
-        public void IsFailed(string meaage = "") 
+        /// <param name="message"></param>
+        public void IsFailed(string message = "") 
         {
-            Message = Message;
+            Message = message;
             Code = ServiceResultCode.Failed;
         }
 
