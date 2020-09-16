@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Meowv.Blog.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:Meowv.Blog.Configurations.AppSettings">
+            <summary>
+            appsettings.json配置文件数据读取类
+            </summary>
+        </member>
+        <member name="F:Meowv.Blog.Configurations.AppSettings._config">
+            <summary>
+            配置文件的根节点
+            </summary>
+        </member>
+        <member name="M:Meowv.Blog.Configurations.AppSettings.#cctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Configurations.AppSettings.EnableDb">
+            <summary>
+            EnableDb
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Configurations.AppSettings.ConnectionStrings">
+            <summary>
+            ConnectionStrings
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Configurations.AppSettings.ApiVersion">
+            <summary>
+            ApiVersion
+            </summary>
+        </member>
+        <member name="F:Meowv.Blog.Configurations.GitHubConfig.API_Authorize">
+            <summary>
+            GET请求，跳转GitHub登录界面，获取用户授权，得到code
+            </summary>
+        </member>
+        <member name="F:Meowv.Blog.Configurations.GitHubConfig.API_AccessToken">
+            <summary>
+            POST请求，根据code得到access_token
+            </summary>
+        </member>
+        <member name="F:Meowv.Blog.Configurations.GitHubConfig.API_User">
+            <summary>
+            GET请求，根据access_token得到用户信息
+            </summary>
+        </member>
+        <member name="F:Meowv.Blog.Configurations.GitHubConfig.UserId">
+            <summary>
+            Github UserId
+            </summary>
+        </member>
+        <member name="F:Meowv.Blog.Configurations.GitHubConfig.Client_ID">
+            <summary>
+            Client ID
+            </summary>
+        </member>
+        <member name="F:Meowv.Blog.Configurations.GitHubConfig.Client_Secret">
+            <summary>
+            Client Secret
+            </summary>
+        </member>
+        <member name="F:Meowv.Blog.Configurations.GitHubConfig.Redirect_Uri">
+            <summary>
+            Authorization callback URL
+            </summary>
+        </member>
+        <member name="F:Meowv.Blog.Configurations.GitHubConfig.ApplicationName">
+            <summary>
+            Application name
+            </summary>
+        </member>
+        <member name="T:Meowv.Blog.Models.Category">
+            <summary>
+            Category
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Models.Category.CategoryName">
+            <summary>
+            分类名称
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Models.Category.DisplayName">
+            <summary>
+            展示名称
+            </summary>
+        </member>
+        <member name="T:Meowv.Blog.Models.FriendLink">
+            <summary>
+            FriendLink
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Models.FriendLink.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Models.FriendLink.LinkUrl">
+            <summary>
+            链接
+            </summary>
+        </member>
+        <member name="T:Meowv.Blog.Models.Post">
+            <summary>
+            Post
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Models.Post.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Models.Post.Author">
+            <summary>
+            作者
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Models.Post.Url">
+            <summary>
+            链接
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Models.Post.Html">
+            <summary>
+            HTML
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Models.Post.Markdown">
+            <summary>
+            Markdown
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Models.Post.CategoryId">
+            <summary>
+            分类Id
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Models.Post.CreationTime">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="T:Meowv.Blog.Models.PostTag">
+            <summary>
+            PostTag
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Models.PostTag.PostId">
+            <summary>
+            文章Id
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Models.PostTag.TagId">
+            <summary>
+            标签Id
+            </summary>
+        </member>
+        <member name="T:Meowv.Blog.Models.Tag">
+            <summary>
+            Tag
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Models.Tag.TagName">
+            <summary>
+            标签名称
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Models.Tag.DisplayName">
+            <summary>
+            展示名称
+            </summary>
+        </member>
+        <member name="T:Meowv.Blog.Repositories.ICategoryRepository">
+            <summary>
+            ICategoryRepository
+            </summary>
+        </member>
+        <member name="T:Meowv.Blog.Repositories.IPostRepository">
+            <summary>
+            IPostRepository
+            </summary>
+        </member>
+        <member name="T:Meowv.Blog.Repositories.IPostTagRepository">
+            <summary>
+            IPostTagRepository
+            </summary>
+        </member>
+        <member name="M:Meowv.Blog.Repositories.IPostTagRepository.BulkInsertAsync(System.Collections.Generic.IEnumerable{Meowv.Blog.Models.PostTag})">
+            <summary>
+            批量插入
+            </summary>
+            <param name="postTags"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Meowv.Blog.Repositories.ITagRepository">
+            <summary>
+            ITagRepository
+            </summary>
+        </member>
+        <member name="M:Meowv.Blog.Repositories.ITagRepository.BulkInsertAsync(System.Collections.Generic.IEnumerable{Meowv.Blog.Models.Tag})">
+            <summary>
+            批量插入
+            </summary>
+            <param name="tags"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

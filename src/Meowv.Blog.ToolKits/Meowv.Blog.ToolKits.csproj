@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\common.props" />
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Extensions\ConvertExtensions.cs" />
+	  <Compile Remove="Extensions\EnumerableExtensions.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="log4net" Version="2.0.10" />
+	  <PackageReference Include="SixLabors.ImageSharp" Version="1.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Meowv.Blog.Domain\Meowv.Blog.Domain.csproj" />
+	</ItemGroup>
+
+</Project>
