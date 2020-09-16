@@ -1,26 +1,54 @@
 ﻿using Meowv.Blog.ToolKits.Base;
+using Meowv.Blog.ToolKits.Extensions;
+using Microsoft.Extensions.Caching.Distributed;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using static Meowv.Blog.Domain.Shared.MeowvBlogDbConsts;
 
 namespace Meowv.Blog.Application.Caching.Authorize.Impl
 {
-    public class AuthorizeCacheService : IAuthorizeCacheService
+    public class AuthorizeCacheService : CachingServiceBase, IAuthorizeCacheService
     {
-        public Task<ServiceResult<string>> GenerateTokenAsync(string access_token, Func<Task<ServiceResult<string>>> factory)
+
+        private const string KEY_GetLoginAddress = "Authorize:GetLoginAddress";
+
+        private const string KEY_GetAccessToken = "Authorize:GetAccessToken-{0}";
+
+        private const string KEY_GenerateToken = "Authorize:GenerateToken-{0}";
+
+        /// <summary>
+        /// 登录成功，生成Token
+        /// </summary>
+        /// <param name="access_token"></param>
+        /// <param name="factory"></param>
+        /// <returns></returns>
+        public async Task<ServiceResult<string>> GenerateTokenAsync(string access_token, Func<Task<ServiceResult<string>>> factory)
         {
-            throw new NotImplementedException();
+            return await Cache.GetOrAddAsync(KEY_GenerateToken.FormatWith(access_token), factory, CacheStrategy.ONE_HOURS);
         }
 
-        public Task<ServiceResult<string>> GetAccessTokenAsync(string code, Func<Task<ServiceResult<string>>> factory)
+        /// <summary>
+        /// 获取AccessToken
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="factory"></param>
+        /// <returns></returns>
+        public async Task<ServiceResult<string>> GetAccessTokenAsync(string code, Func<Task<ServiceResult<string>>> factory)
         {
-            throw new NotImplementedException();
+            return await Cache.GetOrAddAsync(KEY_GetAccessToken.FormatWith(code), factory, CacheStrategy.FIVE_MINUTES);
         }
 
-        public Task<ServiceResult<string>> GetLoginAddressAsync(Func<Task<ServiceResult<string>>> factory)
+        /// <summary>
+        /// 获取登录地址(GitHub)
+        /// </summary>
+        /// <param name="access_token"></param>
+        /// <param name="factory"></param>
+        /// <returns></returns>
+        public async Task<ServiceResult<string>> GetLoginAddressAsync(Func<Task<ServiceResult<string>>> factory)
         {
-            throw new NotImplementedException();
+            return await Cache.GetOrAddAsync(KEY_GetLoginAddress, factory, CacheStrategy.NEVER);
         }
     }
 }

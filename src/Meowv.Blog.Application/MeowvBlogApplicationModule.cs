@@ -1,4 +1,5 @@
-﻿using Volo.Abp.Account;
+﻿using Meowv.Blog.Application.Caching;
+using Volo.Abp.Account;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
@@ -9,7 +10,8 @@ using Volo.Abp.TenantManagement;
 namespace Meowv.Blog
 {
     [DependsOn(
-        typeof(AbpIdentityApplicationModule)
+        typeof(AbpIdentityApplicationModule),
+        typeof(MeowvBlogApplicationCachingModule)
         )]
     public class MeowvBlogApplicationModule : AbpModule
     {
