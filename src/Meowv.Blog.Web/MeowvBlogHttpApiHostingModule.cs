@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Meowv.Blog.BackgroundJobs;
+using Meowv.Blog.BackgroundJobs.Jobs;
 using Meowv.Blog.Configurations;
 using Meowv.Blog.EntityFrameworkCore;
+using Meowv.Blog.HelloWorld.Impl;
 using Meowv.Blog.HttpApi.Hosting.Filters;
 using Meowv.Blog.HttpApi.Hosting.Middleware;
 using Meowv.Blog.Swagger;
@@ -12,6 +15,7 @@ using Meowv.Blog.ToolKits.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,7 +33,8 @@ namespace Meowv.Blog.HttpApi.Hosting
         typeof(AbpAutofacModule),
        typeof(MeowvBlogHttpApiModule),
        typeof(MeowvBlogSwaggerModule),
-       typeof(MeowvBlogFrameworkCoreModule)
+       typeof(MeowvBlogFrameworkCoreModule),
+        typeof(MeowvBlogBackgroundJobsModule)
      )]
     public class MeowvBlogHttpApiHostingModule : AbpModule
     {
@@ -80,7 +85,15 @@ namespace Meowv.Blog.HttpApi.Hosting
 
             });
 
-            Configure<MvcOptions>(options => 
+            context.Services.AddRouting(options => 
+            {
+                //设置URL为小写
+                options.LowercaseUrls = true;
+                //在生成的URL后面添加斜杠
+                options.AppendTrailingSlash = true;
+            });
+
+            Configure<MvcOptions>(options =>
             {
                 var filterMetadata = options.Filters.FirstOrDefault(x => x is ServiceFilterAttribute attribute && attribute.ServiceType.Equals(typeof(AbpExceptionFilter)));
 
@@ -91,11 +104,15 @@ namespace Meowv.Blog.HttpApi.Hosting
                 options.Filters.Add(typeof(MeowvBlogExceptionFilter));
             });
 
+            //后台定时任务
+            //context.Services.AddTransient<IHostedService, HelloWorldJob>();
+
             // 认证授权
             context.Services.AddAuthorization();
 
             // Http请求
             context.Services.AddHttpClient();
+
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -121,6 +138,21 @@ namespace Meowv.Blog.HttpApi.Hosting
 
             //异常处理中间件
             app.UseMiddleware<ExceptionHandlerMiddleware>();
+
+            //使用HSTS的中间件，该中间件添加了严格传输安全头
+            app.UseHsts();
+
+            //直接使用默认的跨域配置
+            app.UseCors();
+
+            //HTTP请求转HTTPS
+            app.UseHttpsRedirection();
+
+            //转发将标头代理到当前请求，配合 Nginx 使用，获取用户真实IP,Forwarded(转发)
+            app.UseForwardedHeaders(new ForwardedHeadersOptions 
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
 
             // 路由映射
             app.UseEndpoints(endpoints =>

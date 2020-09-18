@@ -8,6 +8,9 @@ using System.Text;
 
 namespace Meowv.Blog
 {
+    /// <summary>
+    /// 主要是用来使用Code-First命令的(Add-Migration 和 Update-Database ...)
+    /// </summary>
     public class MeowvBlogMigrationsDbContextFactory : IDesignTimeDbContextFactory<MeowvBlogMigrationsDbContext>
     {
         public MeowvBlogMigrationsDbContext CreateDbContext(string[] args)

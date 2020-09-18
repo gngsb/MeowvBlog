@@ -1,4 +1,5 @@
-﻿using Meowv.Blog.Application.Contracts.Blog;
+﻿using AutoMapper;
+using Meowv.Blog.Application.Contracts.Blog;
 using Meowv.Blog.Models;
 using Meowv.Blog.Repositories;
 using Meowv.Blog.ToolKits.Base;
@@ -44,17 +45,17 @@ namespace Meowv.Blog.Application.Blog.Impl
                 result.IsFailed("文章不存在");
                 return result;
             }
-
-            var dto = new PostDto
-            {
-                Title = post.Title,
-                Author = post.Author,
-                Url = post.Url,
-                Html = post.Html,
-                Markdown = post.Markdown,
-                CategoryId = post.CategoryId,
-                CreationTime = post.CreationTime
-            };
+            var dto = ObjectMapper.Map<Post, PostDto>(post);
+            //var dto = new PostDto
+            //{
+            //    Title = post.Title,
+            //    Author = post.Author,
+            //    Url = post.Url,
+            //    Html = post.Html,
+            //    Markdown = post.Markdown,
+            //    CategoryId = post.CategoryId,
+            //    CreationTime = post.CreationTime
+            //};
             result.IsSuccess(dto);
             return result;
         }
@@ -68,16 +69,18 @@ namespace Meowv.Blog.Application.Blog.Impl
         {
             var result = new ServiceResult<string>();
 
-            var entity = new Post
-            {
-                Title = dto.Title,
-                Author = dto.Author,
-                Url = dto.Url,
-                Html = dto.Html,
-                Markdown = dto.Markdown,
-                CategoryId = dto.CategoryId,
-                CreationTime = dto.CreationTime
-            };
+            var entity = ObjectMapper.Map<PostDto, Post>(dto);
+
+            //var entity = new Post
+            //{
+            //    Title = dto.Title,
+            //    Author = dto.Author,
+            //    Url = dto.Url,
+            //    Html = dto.Html,
+            //    Markdown = dto.Markdown,
+            //    CategoryId = dto.CategoryId,
+            //    CreationTime = dto.CreationTime
+            //};
 
             var post = await _postRepository.InsertAsync(entity);
 

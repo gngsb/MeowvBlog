@@ -3,15 +3,17 @@ using System;
 using Meowv.Blog;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace Meowv.Blog.EntityFrameworkCore.DbMigrations.Migrations
 {
     [DbContext(typeof(MeowvBlogMigrationsDbContext))]
-    partial class MeowvBlogMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200918025501_wallpapers")]
+    partial class wallpapers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -3,15 +3,17 @@ using System;
 using Meowv.Blog;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace Meowv.Blog.EntityFrameworkCore.DbMigrations.Migrations
 {
     [DbContext(typeof(MeowvBlogMigrationsDbContext))]
-    partial class MeowvBlogMigrationsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200918024147_wallpaper")]
+    partial class wallpaper
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,33 +138,6 @@ namespace Meowv.Blog.EntityFrameworkCore.DbMigrations.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("meowv_Tags");
-                });
-
-            modelBuilder.Entity("Meowv.Blog.Wallpapers.Wallpaper", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("varchar(100) CHARACTER SET utf8mb4")
-                        .HasMaxLength(100);
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("varchar(200) CHARACTER SET utf8mb4")
-                        .HasMaxLength(200);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("meowv_Wallpapers");
                 });
 #pragma warning restore 612, 618
         }

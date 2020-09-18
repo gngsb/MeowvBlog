@@ -39,6 +39,11 @@
             Caching
             </summary>
         </member>
+        <member name="T:Meowv.Blog.Configurations.AppSettings.Hangfire">
+            <summary>
+            Hangfire
+            </summary>
+        </member>
         <member name="F:Meowv.Blog.Configurations.GitHubConfig.API_Authorize">
             <summary>
             GET请求，跳转GitHub登录界面，获取用户授权，得到code
@@ -212,6 +217,33 @@
             </summary>
             <param name="tags"></param>
             <returns></returns>
+        </member>
+        <member name="M:Meowv.Blog.Wallpapers.Repositories.IWallpaperRepository.BulkInsertAsync(System.Collections.Generic.IEnumerable{Meowv.Blog.Wallpapers.Wallpaper})">
+            <summary>
+            批量插入
+            </summary>
+            <param name="wallpapers"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Meowv.Blog.Wallpapers.Wallpaper.Url">
+            <summary>
+            URL
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Wallpapers.Wallpaper.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Wallpapers.Wallpaper.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:Meowv.Blog.Wallpapers.Wallpaper.CreateTime">
+            <summary>
+            创建时间
+            </summary>
         </member>
     </members>
 </doc>

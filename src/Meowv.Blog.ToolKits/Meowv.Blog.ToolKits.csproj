@@ -7,7 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Extensions\ConvertExtensions.cs" />
 	  <Compile Remove="Extensions\EnumerableExtensions.cs" />
 	  <Compile Remove="Helper\LoggerHelper.cs" />
 	</ItemGroup>

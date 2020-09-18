@@ -22,6 +22,8 @@ namespace Meowv.Blog.EntityFrameworkCore
 
         public DbSet<FriendLink> FriendLinks { get; set; }
 
+        public DbSet<Wallpapers.Wallpaper> Wallpapers { get; set; }
+
         public MeowvBlogDbContext(DbContextOptions<MeowvBlogDbContext> options) : base(options) 
         {
         }
