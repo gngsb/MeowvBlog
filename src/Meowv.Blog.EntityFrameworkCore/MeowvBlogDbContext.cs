@@ -24,6 +24,8 @@ namespace Meowv.Blog.EntityFrameworkCore
 
         public DbSet<Wallpapers.Wallpaper> Wallpapers { get; set; }
 
+        public DbSet<HotNews.HotNews> HotNews { get; set; }
+
         public MeowvBlogDbContext(DbContextOptions<MeowvBlogDbContext> options) : base(options) 
         {
         }
