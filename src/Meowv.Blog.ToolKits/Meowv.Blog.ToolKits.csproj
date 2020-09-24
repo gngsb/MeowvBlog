@@ -7,21 +7,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Extensions\EnumerableExtensions.cs" />
 	  <Compile Remove="Helper\LoggerHelper.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <PackageReference Include="log4net" Version="2.0.10" />
+	  <PackageReference Include="MailKit" Version="2.9.0" />
+	  <PackageReference Include="MimeKit" Version="2.9.2" />
 	  <PackageReference Include="SixLabors.ImageSharp" Version="1.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Meowv.Blog.Domain\Meowv.Blog.Domain.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Helper\" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -2,7 +2,9 @@
 using Meowv.Blog.Application.Contracts.Wallpaper;
 using Meowv.Blog.Domain.Shared.Enum;
 using Meowv.Blog.ToolKits.Extensions;
+using Meowv.Blog.ToolKits.Helper;
 using Meowv.Blog.Wallpapers.Repositories;
+using MimeKit;
 using NUglify.Helpers;
 using NUglify.JavaScript.Syntax;
 using System;
@@ -92,6 +94,17 @@ namespace Meowv.Blog.BackgroundJobs.Jobs.Wallpaper
             {
                 await _wallpaperRepository.BulkInsertAsync(wallpapers);
             }
+
+            //发送Email
+            var message = new MimeMessage
+            {
+                Subject = "【定时任务】壁纸数据抓取任务推送",
+                Body = new BodyBuilder
+                {
+                    HtmlBody = $"本次抓取到{wallpapers.Count()}条数据，时间:{DateTime.Now:yyyy-MM-dd HH:mm:ss}"
+                }.ToMessageBody()
+            };
+            await EmailHelper.SendAsync(message);
 
         }
 

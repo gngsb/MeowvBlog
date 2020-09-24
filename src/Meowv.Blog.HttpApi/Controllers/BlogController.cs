@@ -1,4 +1,5 @@
 ﻿using Meowv.Blog.Application.Blog;
+using Meowv.Blog.Application.Contracts;
 using Meowv.Blog.Application.Contracts.Blog;
 using Meowv.Blog.Domain.Shared;
 using Meowv.Blog.ToolKits.Base;
@@ -71,6 +72,18 @@ namespace Meowv.Blog.HttpApi.Controllers
         public async Task<ServiceResult<PostDto>> GetPostAsync([Required] int id) 
         {
             return await _blogService.GetPostAsync(id);
+        }
+
+        /// <summary>
+        /// 分页查询文章列表
+        /// </summary>
+        /// <param name="input">[FromQuery]设置input为从URL进行查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("posts")]
+        public async Task<ServiceResult<PagedList<QueryPostDto>>> QueryPostsAsync([FromQuery] PagingInput input) 
+        {
+            return await _blogService.QueryPostsAsync(input);
         }
 
     }

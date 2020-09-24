@@ -53,5 +53,12 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:Meowv.Blog.HttpApi.Controllers.BlogController.QueryPostsAsync(Meowv.Blog.Application.Contracts.PagingInput)">
+            <summary>
+            分页查询文章列表
+            </summary>
+            <param name="input">[FromQuery]设置input为从URL进行查询参数</param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

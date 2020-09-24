@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Meowv.Blog.Application.Caching.Blog;
 using Meowv.Blog.Application.Contracts.Blog;
+using Meowv.Blog.HotNews.Repositories;
 using Meowv.Blog.Models;
 using Meowv.Blog.Repositories;
 using Meowv.Blog.ToolKits.Base;
@@ -10,12 +12,33 @@ using System.Threading.Tasks;
 
 namespace Meowv.Blog.Application.Blog.Impl
 {
-    public class BlogService : ServiceBase, IBlogService
+    public partial class BlogService : ServiceBase, IBlogService
     {
         private readonly IPostRepository _postRepository;
-        public BlogService(IPostRepository postRepository)
+        private readonly IBlogCacheService _blogCacheService;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly ITagRepository _tagRepository;
+        private readonly IPostTagRepository _postTagRepository;
+        private readonly IFriendLinkRepository _friendLinksRepository;
+        private readonly IHotNewsRepository _hotNewsRepository;
+
+
+
+        public BlogService(IBlogCacheService blogCacheService,
+                           IPostRepository postRepository,
+                           ICategoryRepository categoryRepository,
+                           ITagRepository tagRepository,
+                           IPostTagRepository postTagRepository,
+                           IFriendLinkRepository friendLinksRepository,
+                           IHotNewsRepository hotNewsRepository)
         {
+            _blogCacheService = blogCacheService;
             _postRepository = postRepository;
+            _categoryRepository = categoryRepository;
+            _tagRepository = tagRepository;
+            _postTagRepository = postTagRepository;
+            _friendLinksRepository = friendLinksRepository;
+            _hotNewsRepository = hotNewsRepository;
         }
 
         /// <summary>

@@ -21,7 +21,7 @@ namespace Meowv.Blog.ToolKits.Base
         
         }
 
-        public PagedList(int total, IReadOnlyList<T> result) 
+        public PagedList(int total, IReadOnlyList<T> result) : base(result)
         {
             Total = total;
         }

@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using Meowv.Blog.BackgroundJobs.Jobs.Wallpaper;
+using Meowv.Blog.BackgroundJobs.Jobs.HotNews;
+using Meowv.Blog.BackgroundJobs.Jobs.PuppeteerTest;
 
 namespace Meowv.Blog.BackgroundJobs
 {
@@ -23,5 +25,18 @@ namespace Meowv.Blog.BackgroundJobs
             var job = service.GetService<WallpaperJob>();
             RecurringJob.AddOrUpdate("壁纸数据抓取", () => job.ExecuteAsync(), CronType.Hour(1, 3));
         }
+
+        public static void UseHotNewsJob(this IServiceProvider service) 
+        {
+            var job = service.GetService<HotNewsJob>();
+            RecurringJob.AddOrUpdate("每日热点数据抓取", () => job.ExecuteAsync(), CronType.Hour(1, 2));
+        }
+
+        public static void UsePuppeteerTestJob(this IServiceProvider service) 
+        {
+            var job = service.GetService<PuppeteerTestJob>();
+            BackgroundJob.Enqueue(() => job.ExecuteAsync());
+        }
+
     }
 }

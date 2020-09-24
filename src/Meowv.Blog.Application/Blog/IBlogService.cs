@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Meowv.Blog.Application.Blog
 {
-    public interface IBlogService
+    public partial interface IBlogService
     {
         //Task<bool> InsertPostAsync(PostDto dto);
         Task<ServiceResult<string>> InsertPostAsync(PostDto dto);
