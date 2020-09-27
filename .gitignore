@@ -258,3 +258,8 @@ src/Meowv.Blog.IdentityServer/Logs/*
 src/Meowv.Blog.HttpApi.Host/Logs/*
 src/Meowv.Blog.HttpApi.HostWithIds/Logs/*
 src/Meowv.Blog.DbMigrator/Logs/*
+
+#Big files
+src/Meowv.Blog.Web/.local-chromium/Win64-706915/chrome-win/chrome.dll
+src/Meowv.Blog.Web/.local-chromium/Win64-706915/chrome-win/chrome_child.dll
+src/Meowv.Blog.Web/.local-chromium/Win64-706915/chrome-win/interactive_ui_tests.exe
