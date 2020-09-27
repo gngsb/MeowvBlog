@@ -16,5 +16,12 @@ namespace Meowv.Blog.Application.Blog
         /// <param name="input"></param>
         /// <returns></returns>
         Task<ServiceResult<PagedList<QueryPostDto>>> QueryPostsAsync(PagingInput input);
+
+        /// <summary>
+        /// 根据URL获取文章详情
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        Task<ServiceResult<PostDetailDto>> GetPostDetailAsync(string url);
     }
 }

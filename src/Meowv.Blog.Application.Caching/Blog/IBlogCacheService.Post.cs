@@ -17,5 +17,13 @@ namespace Meowv.Blog.Application.Caching.Blog
         /// <param name="factory"></param>
         /// <returns></returns>
         Task<ServiceResult<PagedList<QueryPostDto>>> QueryPostsAsync(PagingInput input, Func<Task<ServiceResult<PagedList<QueryPostDto>>>> factory);
+
+        /// <summary>
+        /// 根据URL获取文章详情
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="factory"></param>
+        /// <returns></returns>
+        Task<ServiceResult<PostDetailDto>> GetPostDetailAsync(string url, Func<Task<ServiceResult<PostDetailDto>>> factory);
     }
 }

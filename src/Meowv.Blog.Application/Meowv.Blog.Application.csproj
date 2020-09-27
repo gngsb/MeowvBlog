@@ -7,14 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Blog\Impl\BlogService.Category.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Blog\Impl\BlogService.Category.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Meowv.Blog.Application.Caching\Meowv.Blog.Application.Caching.csproj" />
   </ItemGroup>
 
