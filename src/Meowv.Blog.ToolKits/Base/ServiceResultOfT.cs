@@ -5,6 +5,10 @@ using System.Text;
 
 namespace Meowv.Blog.ToolKits.Base
 {
+    /// <summary>
+    /// class A ：where T : class 泛型约束，此约束表示类型参数必须是引用类型
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class ServiceResult<T>:ServiceResult where T : class 
     {
         /// <summary>

@@ -1,5 +1,7 @@
 ﻿using Meowv.Blog.Application.Contracts.Blog;
+using Meowv.Blog.Domain.Shared;
 using Meowv.Blog.ToolKits.Base;
+using Meowv.Blog.ToolKits.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +32,29 @@ namespace Meowv.Blog.Application.Blog.Impl
                                Count = g.Count()
                            };
                 result.IsSuccess(list);
+                return result;
+            });
+        }
+
+        /// <summary>
+        /// 获取标签名称
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public async Task<ServiceResult<string>> GetTagAsync(string name) 
+        {
+            return await _blogCacheService.GetTagAsync(name, async () => 
+            {
+                var result = new ServiceResult<string>();
+
+                var tag = await _tagRepository.FindAsync(x => x.DisplayName.Equals(name));
+                if (tag == null) 
+                {
+                    result.IsFailed(ResponseText.WHAT_NOT_EXIST.FormatWith("标签",name));
+                    return result;
+                }
+
+                result.IsSuccess(tag.TagName);
                 return result;
             });
         }
