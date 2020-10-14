@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
@@ -10,6 +11,19 @@ namespace Meowv.Blog.Application.Caching
     public class CachingServiceBase : ITransientDependency
     {
         public IDistributedCache Cache { get; set; }
+
+        public async Task RemoveAsync(string key, int cursor = 0) 
+        {
+            var scan = await RedisHelper.ScanAsync(cursor);
+            var keys = scan.Items;
+
+            if (keys.Any() && keys.IsNullOrEmpty()) 
+            {
+                keys = keys.Where(x => x.StartsWith(key)).ToArray();
+                await RedisHelper.DelAsync(keys);
+            }
+        }
+
     }
 
     public interface ICacheRemoveService 

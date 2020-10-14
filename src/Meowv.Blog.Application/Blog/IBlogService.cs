@@ -20,5 +20,6 @@ namespace Meowv.Blog.Application.Blog
 
         //Task<PostDto> GetPostAsync(int id);
         Task<ServiceResult<PostDto>> GetPostAsync(int id);
+
     }
 }

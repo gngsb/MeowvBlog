@@ -1,4 +1,6 @@
 ﻿using Meowv.Blog.Configurations;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Redis;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -26,6 +28,11 @@ namespace Meowv.Blog.Application.Caching
                 //Redis 的配置属性，如果配置了这个字，将优先于 Configuration 中的配置，同时它支持更多的选项
                 //options.ConfigurationOptions
             });
+
+            var csredis = new CSRedis.CSRedisClient(AppSettings.Caching.RedisConnectionString);
+            RedisHelper.Initialization(csredis);
+            context.Services.AddSingleton<IDistributedCache>(new CSRedisCache(RedisHelper.Instance));
+
         }
     }
 }
